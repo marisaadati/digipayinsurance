@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>نمونهٔ اولیه · خرید بیمه شخص ثالث با مدارک اول</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#EEF0F5; --surface:#FFFFFF; --surface-2:#F4F5F9; --ink:#0D1233; --muted:#6A7088; --line:#E2E5EE;
+  --blue:#2F5BFF; --blue-soft:#E9EEFF; --navy:#020637; --on-navy:#FFFFFF;
+  --good:#11A15A; --good-soft:#E3F6EC; --bad:#E5484D; --bad-soft:#FDECEC; --warn:#B86E00; --warn-soft:#FFF4DE;
+  --plate:#FFFFFF; --plate-ink:#0D1233;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --page:#0B0E1C; --surface:#151A2E; --surface-2:#1C2239; --ink:#E9ECF6; --muted:#9AA2BD; --line:#2A3150;
+    --blue:#5C7DFF; --blue-soft:#1E2A5C; --navy:#4F6BFF; --on-navy:#FFFFFF;
+    --good:#3CCB80; --good-soft:#123326; --bad:#FF6B6F; --bad-soft:#3A1719; --warn:#F2B34B; --warn-soft:#3A2A0F;
+    --plate:#F4F5F9; --plate-ink:#0D1233;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#0B0E1C; --surface:#151A2E; --surface-2:#1C2239; --ink:#E9ECF6; --muted:#9AA2BD; --line:#2A3150;
+  --blue:#5C7DFF; --blue-soft:#1E2A5C; --navy:#4F6BFF; --on-navy:#FFFFFF;
+  --good:#3CCB80; --good-soft:#123326; --bad:#FF6B6F; --bad-soft:#3A1719; --warn:#F2B34B; --warn-soft:#3A2A0F;
+  --plate:#F4F5F9; --plate-ink:#0D1233;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0;background:var(--page);color:var(--ink)}
+body{font-family:"Vazirmatn",Tahoma,"Segoe UI",sans-serif;font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- stage ---------- */
+.stage{max-width:1080px;margin:0 auto;padding:24px 16px 48px;display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:860px){.stage{grid-template-columns:minmax(0,1fr);padding:0 0 32px;gap:0}}
+
+/* ---------- phone ---------- */
+.phone{background:var(--surface);border-radius:28px;overflow:hidden;min-height:760px;display:flex;flex-direction:column;border:1px solid var(--line);position:relative}
+@media (max-width:860px){.phone{border-radius:0;border:0;min-height:100svh}}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;position:sticky;top:0;background:var(--surface);z-index:5}
+.bar h1{font-size:16px;font-weight:700;margin:0}
+.icon-btn{width:40px;height:40px;border:0;background:transparent;border-radius:12px;display:grid;place-items:center;color:var(--ink)}
+.icon-btn:disabled{opacity:.25;cursor:default}
+.icon-btn svg{width:22px;height:22px}
+
+.progress{padding:4px 16px 12px}
+.progress-head{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.progress-head b{font-size:15px}
+.progress-head span{font-size:12px;color:var(--muted)}
+.segs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.seg{height:5px;border-radius:4px;background:var(--line)}
+.seg.on{background:var(--blue)}
+.seg-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
+.seg-labels span{font-size:11px;color:var(--muted);text-align:center;line-height:1.4}
+.seg-labels span.on{color:var(--ink);font-weight:600}
+
+.body{flex:1;padding:8px 16px 24px;display:flex;flex-direction:column;gap:16px}
+.foot{position:sticky;bottom:0;background:var(--surface);padding:12px 16px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;z-index:5}
+
+.btn{border:0;border-radius:14px;padding:14px 16px;font-weight:700;font-size:15px;width:100%;transition:transform .08s ease}
+.btn:active{transform:scale(.99)}
+.btn-primary{background:var(--navy);color:var(--on-navy)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-ghost{background:transparent;color:var(--blue)}
+.btn:disabled{background:var(--line);color:var(--muted);cursor:not-allowed}
+
+h2.title{font-size:18px;margin:0;font-weight:700}
+.lead{margin:0;color:var(--muted);font-size:13.5px}
+.card{background:var(--surface-2);border-radius:18px;padding:16px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.row:last-child{border-bottom:0}
+.row .k{color:var(--muted)}
+.row .v{font-weight:600}
+.money{font-feature-settings:"tnum";white-space:nowrap}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--blue-soft);color:var(--blue)}
+
+/* deadline strip — the one memorable element */
+.deadline{display:flex;align-items:center;gap:12px;background:var(--warn-soft);color:var(--ink);border-radius:16px;padding:12px 14px}
+.deadline .clock{font-feature-settings:"tnum";font-weight:800;font-size:17px;color:var(--warn);min-width:86px;text-align:center;direction:ltr}
+.deadline p{margin:0;font-size:13px;line-height:1.6}
+.deadline p b{font-weight:700}
+
+/* plate */
+.plate{display:flex;direction:ltr;align-items:stretch;background:var(--plate);color:var(--plate-ink);border:2.5px solid #0D1233;border-radius:10px;overflow:hidden;height:64px}
+.plate .flag{width:30px;background:#1F3CA8;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-size:8px;line-height:1.1;padding-bottom:6px;font-family:Arial,sans-serif;font-weight:700}
+.plate .flag i{display:block;width:16px;height:10px;margin-bottom:auto;margin-top:8px;background:linear-gradient(#239f40 33%,#fff 33% 66%,#da0000 66%)}
+.plate input{border:0;background:transparent;text-align:center;font-size:26px;font-weight:700;width:100%;color:var(--plate-ink);font-family:inherit}
+.plate .main{flex:1;display:grid;grid-template-columns:1fr .9fr 1.3fr;align-items:center}
+.plate select{border:0;background:transparent;font-size:24px;font-weight:700;text-align:center;color:var(--plate-ink);appearance:none;padding:0}
+.plate .iran{width:64px;border-left:2.5px solid #0D1233;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.plate .iran small{font-size:12px;font-weight:700}
+.plate .iran input{font-size:20px;height:28px}
+
+.field{display:flex;flex-direction:column;gap:4px;border:1.5px solid var(--line);border-radius:14px;padding:8px 14px;background:var(--surface)}
+.field:focus-within{border-color:var(--blue)}
+.field label{font-size:12px;color:var(--muted)}
+.field input,.field select,.field textarea{border:0;background:transparent;padding:0;font-weight:600;font-size:15px;outline:none}
+.field textarea{resize:none;min-height:48px}
+.field.prefilled{border-color:transparent;background:var(--surface-2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* hero (landing) */
+.hero{background:var(--navy);color:#fff;border-radius:22px;padding:20px 18px;display:flex;flex-direction:column;gap:14px}
+:root[data-theme="dark"] .hero{background:#1C2552}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero{background:#1C2552}}
+.hero h2{margin:0;font-size:20px;line-height:1.5}
+.hero p{margin:0;font-size:13px;opacity:.82}
+.hero .field{background:#fff;border-color:transparent;color:#0D1233}
+.hero .field label{color:#6A7088}
+.hero .field input{color:#0D1233}
+
+/* otp */
+.otp{display:flex;gap:8px;direction:ltr;justify-content:center}
+.otp input{width:46px;height:54px;border:1.5px solid var(--line);border-radius:12px;text-align:center;font-size:22px;font-weight:700;background:var(--surface)}
+.otp input:focus{border-color:var(--blue);outline:none}
+
+/* doc slots */
+.slots{display:flex;flex-direction:column;gap:10px}
+.slot{display:flex;align-items:center;gap:14px;width:100%;text-align:right;border:1.5px dashed var(--line);background:var(--surface);border-radius:16px;padding:12px}
+.slot .thumb{width:68px;height:48px;border-radius:8px;background:var(--surface-2);display:grid;place-items:center;flex-shrink:0;overflow:hidden;position:relative}
+.slot .thumb svg{width:22px;height:22px;color:var(--muted)}
+.slot .txt{flex:1;display:flex;flex-direction:column}
+.slot .txt b{font-size:14px}
+.slot .txt small{font-size:12px;color:var(--muted)}
+.slot.ok{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.ok .txt small{color:var(--good);font-weight:600}
+.slot.bad{border-style:solid;border-color:var(--bad);background:var(--bad-soft)}
+.slot.bad .txt small{color:var(--bad);font-weight:600}
+.slot.checking .txt small{color:var(--blue)}
+.fake-card{position:absolute;inset:6px;border-radius:4px;background:linear-gradient(135deg,#cfe0ff,#e9f0ff);}
+.fake-card::before{content:"";position:absolute;inset:7px 30px 22px 7px;border-radius:2px;background:#9fb5e8}
+.fake-card::after{content:"";position:absolute;left:7px;right:7px;bottom:7px;height:4px;border-radius:2px;background:#9fb5e8}
+.fake-card.policy{background:linear-gradient(135deg,#fff3d6,#fff9ea)}
+.fake-card.policy::before,.fake-card.policy::after{background:#e3c27a}
+.fake-card.blur{filter:blur(2px)}
+.spin{width:18px;height:18px;border:2.5px solid var(--blue-soft);border-top-color:var(--blue);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* insurer cards */
+.ins{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:12px}
+.ins.sel{border-color:var(--blue)}
+.ins-head{display:flex;align-items:center;gap:10px}
+.ins-logo{width:40px;height:40px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;font-weight:800;color:var(--blue)}
+.ins-head b{font-size:15px}
+.ins-head small{display:block;font-size:12px;color:var(--muted)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{border:1.5px solid var(--line);border-radius:14px;background:var(--surface-2);padding:10px;text-align:right;display:flex;flex-direction:column;gap:2px}
+.opt.sel{border-color:var(--blue);background:var(--blue-soft)}
+.opt .lbl{font-size:12.5px;font-weight:700;display:flex;justify-content:space-between}
+.opt .off{font-size:11px;background:var(--bad);color:#fff;border-radius:999px;padding:0 6px}
+.opt s{font-size:11px;color:var(--muted)}
+.opt .p{font-weight:800;font-size:14px}
+.opt .cb{font-size:11.5px;color:var(--blue);font-weight:600;border-top:1px solid var(--line);padding-top:4px;margin-top:4px}
+.penalty{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+.penalty b{color:var(--bad)}
+
+.range-wrap{background:var(--surface-2);border-radius:16px;padding:14px}
+.range-wrap output{display:block;text-align:center;font-weight:800;font-size:16px;margin-bottom:6px}
+input[type=range]{width:100%;accent-color:var(--blue)}
+.range-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+
+.choice{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:16px;padding:14px;background:var(--surface);width:100%;text-align:right}
+.choice.sel{border-color:var(--blue);background:var(--blue-soft)}
+.choice:disabled{opacity:.5;cursor:not-allowed}
+.choice .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;display:grid;place-items:center}
+.choice.sel .dot{border-color:var(--blue)}
+.choice.sel .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--blue)}
+.choice .t{flex:1;display:flex;flex-direction:column}
+.choice .t b{font-size:14px}
+.choice .t small{font-size:12px;color:var(--muted)}
+
+.total{display:flex;justify-content:space-between;align-items:baseline}
+.total span{color:var(--muted);font-size:13px}
+.total b{font-size:20px;font-weight:800}
+.total s{font-size:12px;color:var(--muted);display:block;text-align:left}
+
+.after-note{display:flex;gap:10px;align-items:flex-start;background:var(--good-soft);border-radius:14px;padding:10px 12px;font-size:12.5px}
+.after-note svg{width:18px;height:18px;color:var(--good);flex-shrink:0;margin-top:2px}
+
+/* status timeline */
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.tl li{display:grid;grid-template-columns:28px 1fr;gap:12px;position:relative;padding-bottom:18px}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;right:13px;top:28px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl li.done::before{background:var(--good)}
+.tl .mk{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:var(--surface);display:grid;place-items:center;z-index:1}
+.tl li.done .mk{border-color:var(--good);background:var(--good);color:#fff}
+.tl li.now .mk{border-color:var(--blue)}
+.tl li.fail .mk{border-color:var(--bad);background:var(--bad);color:#fff}
+.tl .mk svg{width:14px;height:14px}
+.tl b{display:block;font-size:14px}
+.tl small{color:var(--muted);font-size:12.5px}
+
+.issued{background:var(--good-soft);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px;text-align:center;align-items:center}
+.issued .big{width:52px;height:52px;border-radius:50%;background:var(--good);color:#fff;display:grid;place-items:center}
+.issued .big svg{width:28px;height:28px}
+
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:40px 8px}
+.center .spin{width:36px;height:36px;border-width:3.5px}
+
+.toast{position:absolute;left:16px;right:16px;bottom:96px;background:var(--ink);color:var(--surface);padding:10px 14px;border-radius:12px;font-size:13px;opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none;z-index:9;text-align:center}
+.toast.show{opacity:1;transform:none}
+
+/* ---------- presenter notes ---------- */
+.notes{position:sticky;top:24px;display:flex;flex-direction:column;gap:16px}
+@media (max-width:860px){.notes{position:static;padding:24px 16px 0}}
+.doc-link{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;color:var(--ink);text-decoration:none}
+.doc-link b{display:block;font-size:14px}
+.doc-link small{color:var(--muted);font-size:12.5px}
+.doc-link svg{width:20px;height:20px;color:var(--blue);flex-shrink:0}
+.doc-link:hover{border-color:var(--blue)}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+.note .where{font-size:12.5px;color:var(--blue);font-weight:700;margin:0 0 4px}
+.note h3{margin:0 0 8px;font-size:19px;line-height:1.5}
+.note p{margin:0 0 10px;font-size:14px;max-width:60ch}
+.note .before{border-right:3px solid var(--line);padding-right:12px;color:var(--muted);font-size:13px;margin:0}
+.demo{border:1.5px dashed var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.demo h4{margin:0;font-size:13px;color:var(--muted);font-weight:600}
+.demo button{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;font-size:13px;text-align:right}
+.demo button:hover{border-color:var(--blue)}
+.demo label{font-size:13px;display:flex;gap:8px;align-items:center}
+.jump{display:flex;flex-wrap:wrap;gap:6px}
+.jump a{font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-decoration:none;background:var(--surface)}
+.jump a.on{border-color:var(--blue);color:var(--blue);font-weight:700}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <main class="phone" aria-live="polite">
+    <header class="bar">
+      <button class="icon-btn" id="back" aria-label="بازگشت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <h1>شخص ثالث</h1>
+      <button class="icon-btn" id="support" aria-label="پشتیبانی"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg></button>
+    </header>
+    <div id="progress"></div>
+    <div id="screen" class="body"></div>
+    <div id="foot"></div>
+    <div class="toast" id="toast" role="status"></div>
+  </main>
+
+  <aside class="notes">
+    <a class="doc-link" href="https://claude.ai/artifact/73kMTSa6FoXbPNNrzRJMCz" target="_blank" rel="noopener">
+      <span><b>سند تحقیق و راه‌حل</b><small>بیان مسئله، بنچ‌مارک رقبا و یوزر فلو</small></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M14 4h6v6M20 4l-9 9"/></svg>
+    </a>
+    <section class="note" id="note"></section>
+    <section class="demo" id="demo" hidden></section>
+    <nav class="jump" id="jump" aria-label="پرش به صفحه‌ها"></nav>
+  </aside>
+</div>
+
+<script>
+(function(){
+const FA = '۰۱۲۳۴۵۶۷۸۹';
+const fa = s => String(s).replace(/[0-9]/g, d => FA[d]);
+const en = s => String(s).replace(/[۰-۹]/g, d => FA.indexOf(d));
+const rial = n => fa(Math.round(n).toLocaleString('en-US')).replace(/,/g,'٬');
+const $ = s => document.querySelector(s);
+
+const ICON = {
+  cam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>',
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>'
+};
+
+/* ---------- state ---------- */
+const S = {
+  plate:{a:'۴۵', l:'ب', b:'۳۶۷', c:'۱۰'}, nid:'۰۰۱۲۳۴۵۶۷۸', phone:'۰۹۱۲۱۲۳۴۵۶۷',
+  docs:{front:'empty', back:'empty', policy:'empty'}, nextBlurry:false,
+  car:{type:'سواری', use:'شخصی', brand:'رانا', model:'رانا پلاس', year:'۱۴۰۰'},
+  prev:{insurer:'تعاون', start:'۱۴۰۴/۰۴/۲۰', end:'۱۴۰۵/۰۴/۲۰', third:'۱۰ درصد', driver:'۵ درصد', changed:'خیر'},
+  cov:8, dur:'12', insurer:'razi', pay:'cash',
+  delivery:'digital', address:'تهران، خیابان ولیعصر، کوچهٔ نهم، پلاک ۱۲', zip:'۱۹۶۷۸۳۵۴۱۱',
+  method:'gateway', status:'review', rejected:false
+};
+
+const COV = [70,100,200,300,400,500,600,700,800,1000,1200,1400];
+const covLabel = m => m >= 1000 ? fa(String(m/1000).replace('.','٫')) + ' میلیارد تومان' : fa(m) + ' میلیون تومان';
+const INSURERS = [
+  {id:'razi', name:'بیمه رازی', short:'ر', solv:'۵/۵', branches:'۴۷', k:1.00, disc:.12},
+  {id:'day', name:'بیمه دی', short:'د', solv:'۵/۵', branches:'۴۹', k:1.01, disc:.10},
+  {id:'saman', name:'بیمه سامان', short:'س', solv:'۵/۵', branches:'۳۸', k:0.99, disc:.08}
+];
+const PENALTY = 27175901;
+function price(ins){
+  const m = COV[S.cov];
+  const f = (0.82 + 0.18 * m / 800) * (S.dur === '6' ? 0.6 : 1) * ins.k;
+  const base = 175327160 * f;
+  const cash = base * (1 - ins.disc);
+  const inst = base * 1.08;
+  const r = v => Math.round(v / 100000) * 100000;
+  return {base, cash, inst, monthly: inst / 6, cbCash: r(cash * .15), cbInst: r(inst * .15)};
+}
+const curIns = () => INSURERS.find(i => i.id === S.insurer);
+const cur = () => { const p = price(curIns()); return S.pay === 'cash' ? {amount:p.cash, orig:p.base, cb:p.cbCash} : {amount:p.inst, orig:null, cb:p.cbInst}; };
+
+/* ---------- deadline ---------- */
+function deadline(){
+  const now = new Date(); const d = new Date(now); d.setHours(21,0,0,0);
+  const today = now < d; if(!today) d.setDate(d.getDate()+1);
+  return {d, today};
+}
+function clockText(){
+  const {d} = deadline(); let s = Math.max(0, Math.floor((d - new Date())/1000));
+  const h = Math.floor(s/3600), m = Math.floor(s%3600/60); s = s%60;
+  const p = n => String(n).padStart(2,'0');
+  return fa(`${p(h)}:${p(m)}:${p(s)}`);
+}
+const dayWord = () => deadline().today ? 'امروز' : 'فردا';
+function deadlineStrip(text){
+  return `<div class="deadline"><span class="clock" data-clock>${clockText()}</span><p>${text}</p></div>`;
+}
+setInterval(() => document.querySelectorAll('[data-clock]').forEach(el => el.textContent = clockText()), 1000);
+
+/* ---------- screens ---------- */
+const STEP_LABELS = ['مدارک و خودرو','پوشش و بیمه‌گر','آدرس','پرداخت'];
+const SCREENS = {
+landing:{
+  step:0,
+  render(){
+    return `
+    <div class="hero">
+      <h2>بیمه شخص ثالث ماشینت رو آنلاین بخر</h2>
+      <p>شمارهٔ پلاک و کد ملی صاحب پلاک را وارد کنید.</p>
+      ${plateHTML()}
+      <div class="field"><label for="nid">کد ملی صاحب پلاک</label><input id="nid" inputmode="numeric" value="${S.nid}"></div>
+    </div>
+    ${deadlineStrip(`سفارش تا ساعت ۲۱ ${dayWord()} ثبت شود، بیمه‌نامه همان روز صادر می‌شود و کش‌بک به کیف پول شما می‌آید.`)}
+    <div class="card">
+      <div class="row"><span class="k">مدارک لازم</span><span class="v">کارت خودرو، بیمه‌نامهٔ قبلی</span></div>
+      <div class="row"><span class="k">زمان تقریبی</span><span class="v">حدود ۴ دقیقه</span></div>
+      <div class="row"><span class="k">روش پرداخت</span><span class="v">نقدی یا قسطی</span></div>
+    </div>`;
+  },
+  foot:() => btn('خرید بیمه شخص ثالث','go-otp'),
+  note:{where:'ورود', h:'کاربر از همین ابتدا می‌داند چه مدارکی لازم است', p:'یک کارت کوتاه مدارک و زمان تقریبی را می‌گوید و نوار مهلت، انگیزهٔ تمام کردن خرید در همان روز را می‌سازد.', before:'در فلوی فعلی کاربر تا بعد از پرداخت نمی‌فهمد که باید مدرک آپلود کند.'}
+},
+otp:{
+  step:0,
+  render(){
+    return `
+    <h2 class="title">کد تأیید را وارد کنید</h2>
+    <p class="lead">کد ۶ رقمی به شمارهٔ ${S.phone} پیامک شد. در این نمونه هر ۶ رقمی پذیرفته می‌شود.</p>
+    <div class="otp" id="otp">${'<input inputmode="numeric" maxlength="1" aria-label="رقم">'.repeat(6)}</div>
+    <p class="lead" style="text-align:center">ارسال دوباره تا ${fa('۱:۵۵')}</p>`;
+  },
+  after(){
+    const ins = [...document.querySelectorAll('#otp input')];
+    ins[0].focus();
+    ins.forEach((el,i) => {
+      el.addEventListener('input', () => { el.value = fa(en(el.value).replace(/\D/g,'').slice(-1)); if(el.value && ins[i+1]) ins[i+1].focus(); checkOtp(); });
+      el.addEventListener('keydown', e => { if(e.key === 'Backspace' && !el.value && ins[i-1]) ins[i-1].focus(); });
+    });
+    function checkOtp(){ $('#foot button').disabled = !ins.every(x => x.value); }
+    checkOtp();
+  },
+  foot:() => btn('تأیید و ادامه','go-docs') + `<button class="btn btn-ghost" data-act="fill-otp">پر کردن خودکار کد (نمایشی)</button>`,
+  note:{where:'لاگین', h:'لاگین بدون تبلیغ محصول دیگر', p:'کاربری که از فلوی بیمه می‌آید فقط کد را می‌بیند، نه بنر سرویس‌های دیگر.', before:'در فلوی فعلی صفحهٔ لاگین وسط خرید بیمه بنر دیجی تین نشان می‌دهد.'}
+},
+docs:{
+  step:1,
+  render(){
+    const d = S.docs;
+    return `
+    <h2 class="title">از مدارک عکس بگیرید</h2>
+    <p class="lead">اطلاعات خودرو و بیمه‌نامهٔ قبلی را از همین عکس‌ها می‌خوانیم، پس لازم نیست چیزی تایپ کنید.</p>
+    <div class="slots">
+      ${slot('front','روی کارت خودرو','کارت یا برگ سبز', d.front, '')}
+      ${slot('back','پشت کارت خودرو','سمت شمارهٔ شاسی', d.back, '')}
+      ${slot('policy','بیمه‌نامهٔ قبلی','صفحهٔ اول بیمه‌نامه', d.policy, 'policy')}
+    </div>
+    ${deadlineStrip(`تا ساعت ۲۱ ${dayWord()} سفارش را ثبت کنید تا کش‌بک بگیرید.`)}`;
+  },
+  foot(){
+    const ok = Object.values(S.docs).every(v => v === 'ok');
+    return btn('خواندن اطلاعات و ادامه','go-reading', !ok) + `<button class="btn btn-ghost" data-act="go-saved">مدارک همراهم نیست</button>`;
+  },
+  note:{where:'گام ۱ · مدارک', h:'مدارک اول، قبل از هر فرمی', p:'سه عکس، با بررسی خوانایی همان لحظه. عکس ناخوانا همین‌جا دوباره گرفته می‌شود، نه بعد از پرداخت.', before:'در فلوی فعلی آپلود مدارک بعد از پرداخت است و ۶٪ کاربران همین‌جا خرید را رها می‌کنند.'},
+  demo:'docs'
+},
+reading:{
+  step:1, noBack:true,
+  render(){ return `<div class="center"><div class="spin"></div><h2 class="title">در حال خواندن اطلاعات از عکس‌ها</h2><p class="lead">مشخصات خودرو و بیمه‌نامهٔ قبلی استخراج می‌شود.</p></div>`; },
+  after(){ setTimeout(() => go('confirm'), 1400); },
+  foot:() => '',
+  note:{where:'گام ۱ · پردازش', h:'عکس‌ها جای تایپ را می‌گیرند', p:'در محصول واقعی این مرحله OCR است. اگر خواندن ناموفق باشد، کاربر فرم خالی را دستی پر می‌کند.', before:'در فلوی فعلی کاربر ۱۰ فیلد را دستی پر می‌کند و بعداً عکس همان مدارک را هم می‌فرستد.'}
+},
+saved:{
+  step:1,
+  render(){
+    return `
+    <div class="issued" style="background:var(--warn-soft)">
+      <h2 class="title">سفارش شما ذخیره شد</h2>
+      <p class="lead">پولی از حساب شما کم نشده است. هر وقت مدارک دستتان بود، از همین‌جا ادامه دهید.</p>
+    </div>
+    ${deadlineStrip(`کش‌بک شما تا ساعت ۲۱ ${dayWord()} رزرو است.`)}
+    <div class="card">
+      <div class="row"><span class="k">پلاک</span><span class="v">${S.plate.a} ${S.plate.l} ${S.plate.b} · ایران ${S.plate.c}</span></div>
+      <div class="row"><span class="k">یادآوری</span><span class="v">پیامک، ۲ ساعت قبل از مهلت</span></div>
+    </div>`;
+  },
+  foot:() => btn('ادامهٔ خرید، مدارک دستم است','go-docs'),
+  note:{where:'شاخهٔ بدون مدرک', h:'کاربر بدون مدرک، قبل از پرداخت خارج می‌شود', p:'سفارش و کش‌بک تا مهلت صدور نگه داشته می‌شود و پیامک یادآوری می‌رود. پولی بلوکه نمی‌شود.', before:'در فلوی فعلی همین کاربر پرداخت می‌کند، گیر می‌افتد و پولش حدود ۷ روز بلوکه می‌ماند.'}
+},
+confirm:{
+  step:1,
+  render(){
+    const c = S.car, p = S.prev;
+    return `
+    <div style="display:flex;justify-content:space-between;align-items:center"><h2 class="title">اطلاعات را بررسی کنید</h2><span class="tag">خوانده‌شده از عکس</span></div>
+    <p class="lead">اگر موردی درست نیست، روی آن بزنید و اصلاحش کنید.</p>
+    <h3 style="margin:4px 0 0;font-size:14px">مشخصات خودرو</h3>
+    <div class="grid2">
+      ${field('car.type','نوع خودرو',c.type)}${field('car.use','کاربری',c.use)}
+      ${field('car.brand','برند',c.brand)}${field('car.model','مدل / تیپ',c.model)}
+    </div>
+    <div class="grid2">${field('car.year','سال ساخت',c.year)}<div class="field prefilled"><label>پلاک</label><input value="${S.plate.a} ${S.plate.l} ${S.plate.b} - ${S.plate.c}" readonly></div></div>
+    <h3 style="margin:4px 0 0;font-size:14px">بیمه‌نامهٔ قبلی</h3>
+    <div class="grid2">
+      ${field('prev.insurer','بیمه‌گر قبلی',p.insurer)}${field('prev.changed','تغییر مالکیت',p.changed)}
+      ${field('prev.start','تاریخ شروع',p.start)}${field('prev.end','تاریخ پایان',p.end)}
+      ${field('prev.third','تخفیف ثالث',p.third)}${field('prev.driver','تخفیف حوادث راننده',p.driver)}
+    </div>`;
+  },
+  after(){
+    document.querySelectorAll('[data-path]').forEach(el => el.addEventListener('input', () => { const [a,b] = el.dataset.path.split('.'); S[a][b] = el.value; }));
+  },
+  foot:() => btn('تأیید و ادامه','go-plan'),
+  note:{where:'گام ۱ · تأیید', h:'یک صفحهٔ تأیید به‌جای چهار صفحه فرم', p:'همهٔ فیلدها از عکس پر شده‌اند و قابل اصلاح‌اند. پلاک همان چیزی است که کاربر در ورود زد.', before:'در فلوی فعلی چهار صفحه پشت سر هم «۱/۴» نشان می‌دهند و صفحهٔ مرور، پلاک را «بدون پلاک» نمایش می‌داد.'}
+},
+plan:{
+  step:2,
+  render(){
+    return `
+    <div class="grid2">
+      <div class="field"><label for="dur">اعتبار بیمه‌نامهٔ جدید</label><select id="dur"><option value="12" ${S.dur==='12'?'selected':''}>یک سال</option><option value="6" ${S.dur==='6'?'selected':''}>شش ماه</option></select></div>
+      <div class="field prefilled"><label>خودرو</label><input value="${S.car.model}" readonly></div>
+    </div>
+    <div class="range-wrap">
+      <label for="cov" class="sr">سقف پوشش مالی</label>
+      <output id="covOut">سقف پوشش: ${covLabel(COV[S.cov])}</output>
+      <input id="cov" type="range" min="0" max="${COV.length-1}" step="1" value="${S.cov}">
+      <div class="range-ends"><span>${covLabel(70)}</span><span>${covLabel(1400)}</span></div>
+    </div>
+    ${deadlineStrip(`کش‌بک هر گزینه به شرط ثبت سفارش تا ساعت ۲۱ ${dayWord()} به کیف پول شما واریز می‌شود.`)}
+    <div id="insList" style="display:flex;flex-direction:column;gap:12px">${insList()}</div>`;
+  },
+  after(){
+    $('#cov').addEventListener('input', e => { S.cov = +e.target.value; $('#covOut').textContent = 'سقف پوشش: ' + covLabel(COV[S.cov]); $('#insList').innerHTML = insList(); });
+    $('#dur').addEventListener('change', e => { S.dur = e.target.value; $('#insList').innerHTML = insList(); });
+  },
+  foot:() => btn('ادامه با ' + curIns().name,'go-address'),
+  note:{where:'گام ۲ · پوشش و بیمه‌گر', h:'کش‌بک با شرطی که کاربر می‌فهمد', p:'همان کش‌بک فعلی، این بار با مهلت روشن و شمارش معکوس. هزینهٔ جدیدی ندارد.', before:'در فلوی فعلی بنر «بعد از تکمیل خرید به کیف پول واریز می‌شود» نه مهلت دارد و نه می‌گوید «تکمیل» یعنی چه.'}
+},
+address:{
+  step:3,
+  render(){
+    const dig = S.delivery === 'digital';
+    return `
+    <h2 class="title">بیمه‌نامه را کجا تحویل بگیرید؟</h2>
+    <button class="choice ${dig?'sel':''}" data-delivery="digital"><span class="dot"></span><span class="t"><b>فقط نسخهٔ الکترونیکی</b><small>بلافاصله بعد از صدور در اپ و پیامک · رایگان</small></span></button>
+    <button class="choice ${!dig?'sel':''}" data-delivery="print"><span class="dot"></span><span class="t"><b>نسخهٔ الکترونیکی و چاپی</b><small>ارسال با پیک در تهران</small></span></button>
+    ${dig ? '' : `
+      <div class="field"><label for="addr">نشانی</label><textarea id="addr" rows="2">${S.address}</textarea></div>
+      <div class="field"><label for="zip">کد پستی</label><input id="zip" inputmode="numeric" value="${S.zip}"></div>`}
+    <div class="field prefilled"><label>شمارهٔ همراه برای پیامک بیمه‌نامه</label><input value="${S.phone}" readonly></div>`;
+  },
+  after(){
+    document.querySelectorAll('[data-delivery]').forEach(b => b.addEventListener('click', () => { S.delivery = b.dataset.delivery; render(); }));
+    const a = $('#addr'); if(a) a.addEventListener('input', () => S.address = a.value);
+  },
+  foot:() => btn('ادامه به پرداخت','go-checkout'),
+  note:{where:'گام ۳ · آدرس', h:'آدرس هم قبل از پرداخت', p:'نسخهٔ الکترونیکی پیش‌فرض است تا برای بیشتر کاربران این گام یک کلیک باشد.', before:'در فلوی فعلی آدرس هم بعد از پرداخت پرسیده می‌شود.'}
+},
+checkout:{
+  step:4,
+  render(){
+    const ins = curIns(), c = cur();
+    const inst = S.pay === 'inst';
+    if(inst) S.method = 'credit'; else if(S.method === 'credit') S.method = 'gateway';
+    return `
+    <div class="card">
+      <div class="row"><span class="k">${ins.name}</span><span class="v">${inst ? 'قسطی' : 'نقدی'}</span></div>
+      <div class="row"><span class="k">سقف پوشش</span><span class="v">${covLabel(COV[S.cov])} · ${S.dur==='12'?'یک سال':'شش ماه'}</span></div>
+      <div class="row"><span class="k">پلاک</span><span class="v">${S.plate.a} ${S.plate.l} ${S.plate.b} · ایران ${S.plate.c}</span></div>
+      <div class="row"><span class="k">مدارک</span><span class="v" style="color:var(--good)">۳ مدرک دریافت شد</span></div>
+      <div class="row"><span class="k">تحویل</span><span class="v">${S.delivery==='digital'?'الکترونیکی':'الکترونیکی و چاپی'}</span></div>
+    </div>
+    <h3 style="margin:0;font-size:15px">روش پرداخت</h3>
+    ${inst ? choice('credit','اعتبار ۶ قسطهٔ بیمه','بدون کارمزد · بدون چک و سفته', true)
+           : choice('gateway','درگاه پرداخت اینترنتی','همهٔ کارت‌های بانکی') + choice('wallet','کیف پول','موجودی: ۰ ریال', false, true)}
+    ${deadlineStrip(`با پرداخت تا ساعت ۲۱ ${dayWord()}، <b>${rial(c.cb)} ریال</b> کش‌بک بعد از صدور به کیف پول شما واریز می‌شود.`)}
+    <div class="after-note">${ICON.check}<span>این آخرین گام است. بعد از پرداخت کاری لازم نیست؛ بیمه‌نامه پس از بررسی مدارک صادر می‌شود.</span></div>`;
+  },
+  after(){
+    document.querySelectorAll('[data-method]').forEach(b => b.addEventListener('click', () => { if(b.disabled) return; S.method = b.dataset.method; render(); }));
+  },
+  foot(){
+    const c = cur();
+    return `<div class="total"><span>مبلغ پرداختی</span><div>${c.orig ? `<s class="money">${rial(c.orig)} ریال</s>` : ''}<b class="money">${rial(c.amount)} ریال</b></div></div>` + btn('پرداخت و ثبت نهایی','go-paying');
+  },
+  note:{where:'گام ۴ · پرداخت', h:'پرداخت، آخرین کار کاربر', p:'نوار پیشرفت روی گام آخر است و یک خط صریح می‌گوید بعد از پرداخت کاری نمانده.', before:'در فلوی فعلی صفحهٔ پرداخت نوار پیشرفت ندارد و دو گام بعد از آن پنهان است.'}
+},
+paying:{
+  step:4, noBack:true,
+  render(){ return `<div class="center"><div class="spin"></div><h2 class="title">در حال اتصال به درگاه</h2><p class="lead">در این نمونه پرداخت شبیه‌سازی می‌شود.</p></div>`; },
+  after(){ setTimeout(() => { S.status = 'review'; S.rejected = false; go('status'); }, 1300); },
+  foot:() => '',
+  note:{where:'پرداخت', h:'شبیه‌سازی درگاه', p:'در محصول واقعی کاربر به درگاه بانکی یا صفحهٔ اعتبار می‌رود و به صفحهٔ وضعیت برمی‌گردد.', before:''}
+},
+status:{
+  step:5, noBack:true,
+  render(){
+    const st = S.status, c = cur();
+    const li = (cls, icon, b, s) => `<li class="${cls}"><span class="mk">${icon}</span><span><b>${b}</b><small>${s}</small></span></li>`;
+    const sp = '<span class="spin" style="width:14px;height:14px;border-width:2px"></span>';
+    if(st === 'issued'){
+      return `
+      <div class="issued"><span class="big">${ICON.shield}</span><h2 class="title">بیمه‌نامهٔ شما صادر شد</h2><p class="lead">شمارهٔ بیمه‌نامه: ${fa('1405/3100/88421')}</p></div>
+      <div class="card">
+        <div class="row"><span class="k">بیمه‌گر</span><span class="v">${curIns().name}</span></div>
+        <div class="row"><span class="k">اعتبار</span><span class="v">${S.dur==='12'?'یک سال':'شش ماه'} از امروز ساعت ۲۴</span></div>
+        <div class="row"><span class="k">کش‌بک</span><span class="v" style="color:var(--good)">${rial(c.cb)} ریال واریز شد</span></div>
+      </div>`;
+    }
+    return `
+    <h2 class="title">${st==='rejected' ? 'یک مدرک نیاز به عکس دوباره دارد' : 'پرداخت موفق بود'}</h2>
+    <p class="lead">${st==='rejected' ? 'فقط همین یک مدرک را دوباره بفرستید؛ بقیهٔ سفارش سر جایش است.' : 'مدارک شما در حال بررسی است. لازم نیست کاری انجام دهید؛ صدور بیمه‌نامه را پیامک می‌کنیم.'}</p>
+    <ol class="tl">
+      ${li('done', ICON.check, 'پرداخت', rial(c.amount) + ' ریال')}
+      ${st==='rejected' ? li('fail', ICON.x, 'بررسی مدارک', 'پشت کارت خودرو خوانا نیست') : li('now', sp, 'بررسی مدارک', 'معمولاً کمتر از یک ساعت')}
+      ${li('', '', 'صدور بیمه‌نامه', `تا ساعت ۲۴ ${dayWord()}`)}
+      ${li('', '', 'واریز کش‌بک', rial(c.cb) + ' ریال به کیف پول')}
+    </ol>
+    ${st==='rejected' ? `<div class="slots">${slot('back','پشت کارت خودرو','عکس جدید بگیرید', S.docs.back, '')}</div>` : ''}`;
+  },
+  foot(){
+    if(S.status === 'issued') return btn('دریافت فایل بیمه‌نامه','toast-download') + `<button class="btn btn-ghost" data-act="restart">شروع دوباره نمونه</button>`;
+    if(S.status === 'rejected') return btn('ارسال مدرک','resend', S.docs.back !== 'ok');
+    return btn('بازگشت به خانه','toast-home');
+  },
+  note:{where:'بعد از پرداخت', h:'کاربر فقط منتظر می‌ماند', p:'اگر کارشناس مدرکی را رد کند، کاربر فقط همان یک مدرک را دوباره می‌فرستد. با صدور، کش‌بک واریز می‌شود.', before:'در فلوی فعلی کاربر بعد از پرداخت تازه باید همهٔ مدارک و آدرس را بفرستد.'},
+  demo:'status'
+}
+};
+const ORDER = ['landing','otp','docs','saved','reading','confirm','plan','address','checkout','paying','status'];
+const JUMP = [['landing','ورود'],['otp','لاگین'],['docs','مدارک'],['saved','بدون مدرک'],['confirm','تأیید'],['plan','بیمه‌گر'],['address','آدرس'],['checkout','پرداخت'],['status','وضعیت']];
+const BACK = {otp:'landing', docs:'otp', saved:'docs', confirm:'docs', plan:'confirm', address:'plan', checkout:'address'};
+
+/* ---------- pieces ---------- */
+function btn(label, act, disabled){ return `<button class="btn btn-primary" data-act="${act}" ${disabled?'disabled':''}>${label}</button>`; }
+function plateHTML(){
+  const letters = ['ب','ج','د','س','ص','ط','ق','ل','م','ن','و','هـ','ی'];
+  return `<div class="plate" role="group" aria-label="شمارهٔ پلاک">
+    <span class="flag"><i></i>I.R.<br>IRAN</span>
+    <span class="main">
+      <input aria-label="دو رقم اول پلاک" maxlength="2" inputmode="numeric" value="${S.plate.a}" data-plate="a">
+      <select aria-label="حرف پلاک" data-plate="l">${letters.map(x => `<option ${x===S.plate.l?'selected':''}>${x}</option>`).join('')}</select>
+      <input aria-label="سه رقم پلاک" maxlength="3" inputmode="numeric" value="${S.plate.b}" data-plate="b">
+    </span>
+    <span class="iran"><small>ایران</small><input aria-label="کد شهر" maxlength="2" inputmode="numeric" value="${S.plate.c}" data-plate="c"></span>
+  </div>`;
+}
+function slot(key, title, hint, state, kind){
+  const thumb = state === 'empty' ? ICON.cam
+    : state === 'checking' ? `<span class="fake-card ${kind} ${S.nextBlurry?'blur':''}"></span>`
+    : `<span class="fake-card ${kind} ${state==='bad'?'blur':''}"></span>`;
+  const sub = {empty:hint, checking:'در حال بررسی خوانایی…', ok:'خوانا است ✓', bad:'تصویر تار است؛ دوباره بگیرید'}[state];
+  const cls = state === 'empty' ? '' : state;
+  return `<button class="slot ${cls}" data-slot="${key}" ${state==='checking'?'disabled':''}>
+    <span class="thumb">${thumb}</span>
+    <span class="txt"><b>${title}</b><small>${sub}</small></span>
+    ${state==='checking' ? '<span class="spin"></span>' : ''}
+  </button>`;
+}
+function field(path, label, val){
+  const id = path.replace('.','-');
+  return `<div class="field prefilled"><label for="${id}">${label}</label><input id="${id}" data-path="${path}" value="${val}"></div>`;
+}
+function choice(m, b, s, forced, disabled){
+  const sel = S.method === m;
+  return `<button class="choice ${sel?'sel':''}" data-method="${m}" ${disabled?'disabled':''} ${forced?'aria-disabled="true"':''}><span class="dot"></span><span class="t"><b>${b}</b><small>${s}</small></span></button>`;
+}
+function insList(){
+  return INSURERS.map(ins => {
+    const p = price(ins), sel = S.insurer === ins.id;
+    return `<div class="ins ${sel?'sel':''}">
+      <div class="ins-head"><span class="ins-logo">${ins.short}</span><span><b>${ins.name}</b><small>توانگری مالی: ${ins.solv} · تعداد شعب: ${ins.branches}</small></span></div>
+      <div class="penalty"><span>جریمهٔ دیرکرد (در قیمت لحاظ شده)</span><b class="money">${rial(PENALTY)} ریال</b></div>
+      <div class="opts">
+        <button class="opt ${sel&&S.pay==='cash'?'sel':''}" data-pick="${ins.id}:cash">
+          <span class="lbl">نقدی <span class="off">${fa(Math.round(ins.disc*100))}٪</span></span>
+          <s class="money">${rial(p.base)} ریال</s><span class="p money">${rial(p.cash)} ریال</span>
+          <span class="cb">کش‌بک ${rial(p.cbCash)} ریال</span>
+        </button>
+        <button class="opt ${sel&&S.pay==='inst'?'sel':''}" data-pick="${ins.id}:inst">
+          <span class="lbl">قسطی ۶ ماهه</span>
+          <s>ماهانه ${rial(p.monthly)} ریال</s><span class="p money">${rial(p.inst)} ریال</span>
+          <span class="cb">کش‌بک ${rial(p.cbInst)} ریال</span>
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- render ---------- */
+let current = 'landing';
+function progressHTML(step){
+  if(!step || step > 4) return '';
+  return `<div class="progress">
+    <div class="progress-head"><b>${STEP_LABELS[step-1]}</b><span>گام ${fa(step)} از ۴</span></div>
+    <div class="segs">${[1,2,3,4].map(i => `<span class="seg ${i<=step?'on':''}"></span>`).join('')}</div>
+    <div class="seg-labels">${STEP_LABELS.map((l,i) => `<span class="${i+1===step?'on':''}">${l}</span>`).join('')}</div>
+  </div>`;
+}
+function render(){
+  const sc = SCREENS[current];
+  $('#progress').innerHTML = progressHTML(sc.step);
+  $('#screen').innerHTML = sc.render();
+  const f = sc.foot();
+  $('#foot').innerHTML = f ? `<div class="foot">${f}</div>` : '';
+  $('#back').disabled = !BACK[current];
+  const n = sc.note;
+  $('#note').innerHTML = `<p class="where">${n.where}</p><h3>${n.h}</h3><p>${n.p}</p>${n.before ? `<p class="before">${n.before}</p>` : ''}`;
+  renderDemo(sc.demo);
+  $('#jump').innerHTML = JUMP.map(([k,l]) => `<a href="#${k}" class="${k===current?'on':''}">${l}</a>`).join('');
+  bindPlate();
+  if(sc.after) sc.after();
+}
+function renderDemo(kind){
+  const d = $('#demo');
+  if(!kind){ d.hidden = true; d.innerHTML = ''; return; }
+  d.hidden = false;
+  if(kind === 'docs'){
+    d.innerHTML = `<h4>کنترل ارائه</h4>
+      <label><input type="checkbox" id="blurNext" ${S.nextBlurry?'checked':''}> عکس بعدی ناخوانا باشد</label>
+      <button data-act="fill-docs">پر کردن هر سه مدرک</button>`;
+    $('#blurNext').addEventListener('change', e => S.nextBlurry = e.target.checked);
+  } else if(kind === 'status'){
+    d.innerHTML = `<h4>کنترل ارائه: نتیجهٔ بررسی کارشناس</h4>
+      <button data-act="approve">تأیید مدارک و صدور بیمه‌نامه</button>
+      <button data-act="reject">رد پشت کارت خودرو</button>`;
+  }
+}
+function bindPlate(){
+  document.querySelectorAll('[data-plate]').forEach(el => {
+    const ev = el.tagName === 'SELECT' ? 'change' : 'input';
+    el.addEventListener(ev, () => { if(el.tagName !== 'SELECT') el.value = fa(en(el.value).replace(/\D/g,'')); S.plate[el.dataset.plate] = el.value; });
+  });
+  const nid = $('#nid'); if(nid) nid.addEventListener('input', () => { nid.value = fa(en(nid.value).replace(/\D/g,'').slice(0,10)); S.nid = nid.value; });
+}
+function go(name){
+  if(!SCREENS[name]) name = 'landing';
+  current = name;
+  if(location.hash.slice(1) !== name) history.replaceState(null, '', '#' + name);
+  render();
+  $('#screen').scrollTop = 0; window.scrollTo({top:0});
+}
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2200); }
+
+function shoot(key){
+  const bad = S.nextBlurry;
+  S.docs[key] = 'checking'; render();
+  setTimeout(() => {
+    S.docs[key] = bad ? 'bad' : 'ok';
+    if(bad){ S.nextBlurry = false; }
+    render();
+  }, 900);
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', e => {
+  const s = e.target.closest('[data-slot]');
+  if(s && !s.disabled){ shoot(s.dataset.slot); return; }
+  const pk = e.target.closest('[data-pick]');
+  if(pk){ const [id, pay] = pk.dataset.pick.split(':'); S.insurer = id; S.pay = pay; $('#insList').innerHTML = insList(); $('#foot').innerHTML = `<div class="foot">${SCREENS.plan.foot()}</div>`; return; }
+  const a = e.target.closest('[data-act]');
+  if(!a || a.disabled) return;
+  const act = a.dataset.act;
+  if(act.startsWith('go-')) return go(act.slice(3));
+  if(act === 'fill-otp'){ document.querySelectorAll('#otp input').forEach((x,i) => x.value = fa(i+1)); $('#foot button').disabled = false; return; }
+  if(act === 'fill-docs'){ S.docs = {front:'ok', back:'ok', policy:'ok'}; if(current === 'docs') render(); return; }
+  if(act === 'approve'){ if(current !== 'status') return; S.status = 'review'; render(); setTimeout(() => { S.status = 'issued'; render(); }, 700); return; }
+  if(act === 'reject'){ if(current !== 'status') return; S.status = 'rejected'; S.docs.back = 'empty'; render(); return; }
+  if(act === 'resend'){ S.status = 'review'; render(); toast('مدرک ارسال شد و دوباره بررسی می‌شود'); return; }
+  if(act === 'toast-download'){ toast('در این نمونه دانلود فایل فعال نیست'); return; }
+  if(act === 'toast-home'){ toast('در محصول واقعی به خانهٔ اپ برمی‌گردید'); return; }
+  if(act === 'restart'){ S.docs = {front:'empty', back:'empty', policy:'empty'}; S.status = 'review'; go('landing'); return; }
+});
+$('#back').addEventListener('click', () => { if(BACK[current]) go(BACK[current]); });
+$('#support').addEventListener('click', () => toast('پشتیبانی در این نمونه فعال نیست'));
+
+function fromHash(){
+  const h = location.hash.slice(1);
+  if(['confirm','plan','address','checkout','status'].includes(h) && Object.values(S.docs).some(v => v !== 'ok')) S.docs = {front:'ok', back:'ok', policy:'ok'};
+  go(SCREENS[h] ? h : 'landing');
+}
+window.addEventListener('hashchange', fromHash);
+fromHash();
+})();
+</script>
+</body>
+</html>
