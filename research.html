@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>سند تحقیق بیمه شخص ثالث</title>
+<meta name="description" content="کاهش ریزش پس از پرداخت در خرید بیمه شخص ثالث دیجی‌پی: بیان مسئله، بنچ‌مارک رقبا، راه‌حل و یوزر فلو">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#EEF0F5; --surface:#FFFFFF; --surface-2:#F4F5F9; --ink:#0D1233; --muted:#6A7088; --line:#E2E5EE;
+  --blue:#2F5BFF; --blue-soft:#E9EEFF; --navy:#020637; --hero:#020637;
+  --good:#11A15A; --good-soft:#E3F6EC; --bad:#E5484D; --bad-soft:#FDECEC; --warn:#B86E00; --warn-soft:#FFF4DE;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --page:#0B0E1C; --surface:#151A2E; --surface-2:#1C2239; --ink:#E9ECF6; --muted:#9AA2BD; --line:#2A3150;
+    --blue:#5C7DFF; --blue-soft:#1E2A5C; --navy:#4F6BFF; --hero:#1C2552;
+    --good:#3CCB80; --good-soft:#123326; --bad:#FF6B6F; --bad-soft:#3A1719; --warn:#F2B34B; --warn-soft:#3A2A0F;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#0B0E1C; --surface:#151A2E; --surface-2:#1C2239; --ink:#E9ECF6; --muted:#9AA2BD; --line:#2A3150;
+  --blue:#5C7DFF; --blue-soft:#1E2A5C; --navy:#4F6BFF; --hero:#1C2552;
+  --good:#3CCB80; --good-soft:#123326; --bad:#FF6B6F; --bad-soft:#3A1719; --warn:#F2B34B; --warn-soft:#3A2A0F;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--page);color:var(--ink)}
+body{font-family:"Vazirmatn",Tahoma,"Segoe UI",sans-serif;font-size:15.5px;line-height:1.9;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:16px;color:var(--ink)}
+.brand i{width:28px;height:28px;border-radius:9px;background:var(--blue);display:grid;place-items:center;color:#fff;font-style:normal;font-size:15px}
+.top nav{display:flex;gap:4px;overflow-x:auto;margin-inline-start:auto;scrollbar-width:none}
+.top nav a{white-space:nowrap;font-size:13px;color:var(--muted);padding:6px 10px;border-radius:999px}
+.top nav a:hover{background:var(--surface-2);color:var(--ink);text-decoration:none}
+.top .cta{white-space:nowrap;font-size:13px;font-weight:700;background:var(--navy);color:#fff;padding:7px 14px;border-radius:10px}
+.top .cta:hover{text-decoration:none;opacity:.92}
+@media (max-width:760px){.top nav{display:none}.top .cta{margin-inline-start:auto}}
+
+.wrap{max-width:1080px;margin:0 auto;padding:24px 16px 64px;display:flex;flex-direction:column;gap:20px}
+
+/* hero */
+.hero{background:var(--hero);color:#fff;border-radius:24px;padding:32px 28px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset-inline-start:-80px;bottom:-120px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(47,91,255,.55),transparent 70%)}
+.hero .eyebrow{font-size:13px;font-weight:600;opacity:.75}
+.hero h1{margin:0;font-size:28px;line-height:1.5;font-weight:800;max-width:24ch}
+.hero p{margin:0;font-size:15px;opacity:.85;max-width:62ch}
+.hero .meta{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff}
+@media (max-width:600px){.hero{padding:24px 18px}.hero h1{font-size:22px}}
+
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--surface);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.kpi b{font-size:26px;font-weight:800;line-height:1.3}
+.kpi span{font-size:13px;color:var(--muted);line-height:1.6}
+.kpi.bad b{color:var(--bad)}
+.kpi.blue b{color:var(--blue)}
+
+/* sections */
+.sec{background:var(--surface);border-radius:22px;padding:28px;display:flex;flex-direction:column;gap:16px;scroll-margin-top:72px}
+@media (max-width:600px){.sec{padding:20px 16px;border-radius:18px}}
+.sec-head{display:flex;align-items:center;gap:12px}
+.sec-head .n{width:34px;height:34px;border-radius:11px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;font-weight:800;flex-shrink:0}
+.sec h2{margin:0;font-size:21px;font-weight:800}
+.sec h3{margin:8px 0 0;font-size:16px;font-weight:700}
+.sec p{margin:0;max-width:72ch}
+.muted{color:var(--muted);font-size:13.5px}
+
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.sum{background:var(--surface-2);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.sum small{font-size:12px;font-weight:700;color:var(--blue)}
+.sum span{font-size:14px;line-height:1.7}
+
+ul.dots,ol.nums{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+ul.dots li{position:relative;padding-inline-start:22px}
+ul.dots li::before{content:"";position:absolute;inset-inline-start:4px;top:.75em;width:8px;height:8px;border-radius:50%;background:var(--bad)}
+ol.nums{counter-reset:n}
+ol.nums li{counter-increment:n;display:grid;grid-template-columns:30px 1fr;gap:10px;background:var(--surface-2);border-radius:14px;padding:12px 14px}
+ol.nums li::before{content:counter(n,persian);width:26px;height:26px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;margin-top:2px}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:16px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{text-align:right;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
+th{background:var(--surface-2);font-size:12.5px;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+tr.us td{background:var(--bad-soft)}
+td b.bad{color:var(--bad)}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.mid{background:var(--warn-soft);color:var(--warn)}
+
+.callout{display:flex;gap:12px;align-items:flex-start;background:var(--blue-soft);border-radius:16px;padding:14px 16px;font-size:14px}
+.callout.warn{background:var(--warn-soft)}
+.callout svg{width:20px;height:20px;flex-shrink:0;margin-top:3px;color:var(--blue)}
+.callout.warn svg{color:var(--warn)}
+
+/* flow compare */
+.flows{display:flex;flex-direction:column;gap:18px;background:var(--surface-2);border-radius:18px;padding:18px}
+.flow-row{display:flex;flex-direction:column;gap:8px}
+.flow-row > b{font-size:13px;color:var(--muted)}
+.steps{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.step{background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:8px 14px;font-size:13.5px;font-weight:600;white-space:nowrap}
+.step.after{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.step.pay{border-color:var(--blue);background:var(--blue);color:#fff}
+.arrow{color:var(--muted);font-size:14px}
+.flow-tag{font-size:12px;font-weight:700;color:var(--bad)}
+
+/* components */
+.comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.comp{border:1.5px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.comp .ix{font-size:12px;font-weight:800;color:var(--blue)}
+.comp b{font-size:15px}
+.comp p{font-size:13.5px;color:var(--muted);line-height:1.8}
+.comp .fix{margin-top:auto;font-size:13px;font-weight:600;color:var(--good);border-top:1px dashed var(--line);padding-top:8px}
+
+/* user flow */
+.uflow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,260px);gap:12px 20px;align-items:start}
+@media (max-width:760px){.uflow{grid-template-columns:1fr}}
+.vline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.vline li{display:grid;grid-template-columns:36px 1fr;gap:12px;position:relative;padding-bottom:14px}
+.vline li::before{content:"";position:absolute;inset-inline-start:17px;top:36px;bottom:0;width:2px;background:var(--line)}
+.vline li:last-child::before{display:none}
+.vline .dot{width:36px;height:36px;border-radius:12px;background:var(--surface-2);border:1.5px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--muted);z-index:1}
+.vline .box{background:var(--surface-2);border-radius:14px;padding:8px 14px;display:flex;flex-direction:column}
+.vline .box b{font-size:14px}
+.vline .box small{font-size:12.5px;color:var(--muted)}
+.vline li.step-on .dot{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}
+.vline li.pay .dot{background:var(--blue);border-color:var(--blue);color:#fff}
+.vline li.pay .box{background:var(--blue-soft)}
+.vline li.ok .dot{background:var(--good);border-color:var(--good);color:#fff}
+.vline li.ok .box{background:var(--good-soft)}
+.vline li.q .box{background:transparent;border:1.5px dashed var(--line)}
+.branches{display:flex;flex-direction:column;gap:12px}
+.branch{border:1.5px dashed var(--warn);background:var(--warn-soft);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:4px;font-size:13.5px}
+.branch small{font-weight:700;color:var(--warn);font-size:12px}
+.branch b{font-size:14px}
+
+/* checklist */
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.checks li{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:14px;padding:10px 14px;font-size:14px}
+.checks li::before{content:"؟";width:24px;height:24px;border-radius:8px;background:var(--warn-soft);color:var(--warn);display:grid;place-items:center;font-weight:800;flex-shrink:0}
+
+footer{text-align:center;color:var(--muted);font-size:12.5px;padding-top:8px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <span class="brand"><i>د</i>بیمه شخص ثالث</span>
+    <nav aria-label="بخش‌ها">
+      <a href="#summary">خلاصه</a><a href="#problem">مسئله</a><a href="#bench">رقبا</a><a href="#solution">راه‌حل</a><a href="#flow">یوزر فلو</a><a href="#metrics">معیارها</a>
+    </nav>
+    <a class="cta" href="insurance-mvp.html">مشاهدهٔ نمونهٔ اولیه</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">سند تحقیق و راه‌حل · ۸ آبان ۱۴۰۵</span>
+    <h1>کاهش ریزش پس از پرداخت در خرید بیمه شخص ثالث دیجی‌پی</h1>
+    <p>۶٪ از کاربرانی که بیمهٔ شخص ثالث را پرداخت می‌کنند، خریدشان را نهایی نمی‌کنند، چون فلوی فعلی به آن‌ها القا می‌کند با پرداخت کارشان تمام شده است. راه‌حل این است که مثل رقبای اصلی، مدارک قبل از پرداخت گرفته شود و پرداخت واقعاً آخرین کار کاربر باشد.</p>
+    <div class="meta"><span class="chip">بیان مسئله</span><span class="chip">بنچ‌مارک رقبا</span><span class="chip">یوزر فلو</span></div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi bad"><b>۶٪</b><span>ریزش پرداخت‌کنندگان بعد از پرداخت</span></div>
+    <div class="kpi"><b>~۷ روز</b><span>بلوکه ماندن پول کاربر</span></div>
+    <div class="kpi"><b>۲ گام</b><span>کار پنهان بعد از پرداخت</span></div>
+    <div class="kpi blue"><b>۴ گام</b><span>فلوی پیشنهادی، پرداخت در انتها</span></div>
+  </div>
+
+  <section class="sec" id="summary">
+    <div class="sec-head"><span class="n">۱</span><h2>خلاصه</h2></div>
+    <div class="summary">
+      <div class="sum"><small>مسئله</small><span>۶٪ از پرداخت‌کنندگان مدارک را آپلود نمی‌کنند و بیمه‌نامه صادر نمی‌شود</span></div>
+      <div class="sum"><small>علت اصلی</small><span>پرداخت وسط فلوست و نوار پیشرفت دو گام بعد از آن را پنهان می‌کند</span></div>
+      <div class="sum"><small>بازار</small><span>ازکی و بیمه‌بازار مدارک را قبل از پرداخت می‌گیرند</span></div>
+      <div class="sum"><small>راه‌حل</small><span>مدارک اول با پیش‌پر شدن فرم، پرداخت در انتها، کش‌بک زمان‌دار</span></div>
+      <div class="sum"><small>معیار موفقیت</small><span>بیمه‌نامهٔ صادرشده به ازای هر ورود به فلو</span></div>
+    </div>
+  </section>
+
+  <section class="sec" id="problem">
+    <div class="sec-head"><span class="n">۲</span><h2>بیان مسئله</h2></div>
+    <p>کاربر قبل از پرداخت ۷ صفحه را طی می‌کند و با دکمهٔ «تایید و پرداخت» همه‌چیز شبیه پایان خرید است. اما دو گام دیگر بعد از پرداخت مانده: آپلود مدارک و ثبت آدرس. ۶٪ از کاربران همین‌جا می‌روند.</p>
+    <h3>پیامدها</h3>
+    <ul class="dots">
+      <li>کاربر فکر می‌کند بیمه خریده، ولی بیمه‌نامه‌ای صادر نشده و خودرویش بی‌بیمه است.</li>
+      <li>پول کاربر حدود ۷ روز بلوکه می‌ماند و به تماس با پشتیبانی و افت اعتماد می‌انجامد.</li>
+      <li>دیجی‌پی فروشی را از دست می‌دهد که کاربر برایش پول هم داده بود. درآمد خواب ۷ روزهٔ این پول حدود ۰٫۶٪ مبلغ است و از حاشیهٔ یک فروش کامل کمتر است.</li>
+    </ul>
+    <h3>شواهد از فلوی فعلی</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>یافته</th><th>چرا مهم است</th></tr></thead>
+      <tbody>
+        <tr><td>چهار صفحه پشت سر هم نوار پیشرفت «۱/۴» دارند و صفحهٔ پرداخت اصلاً نوار پیشرفت ندارد</td><td>کاربر نمی‌داند بعد از پرداخت هنوز کاری مانده</td></tr>
+        <tr><td>کاربر مشخصات خودرو و بیمه‌نامهٔ قبلی را دستی تایپ می‌کند، بعد عکس همان مدارک را آپلود می‌کند</td><td>یک کار دو بار انجام می‌شود</td></tr>
+        <tr><td>کاربر بدون استعلام هم ۵ صفحه فرم را قبل از پرداخت پر می‌کند</td><td>کاربر تحمل کار قبل از پرداخت را دارد؛ مشکل کار بعد از آن است</td></tr>
+        <tr><td>کش‌بک «بعد از تکمیل خرید» مهلت ندارد و شرطش مبهم است</td><td>ابزار انگیزشی موجود بی‌اثر می‌ماند</td></tr>
+        <tr><td>پلاک واردشده در لندینگ، در صفحهٔ مرور «بدون پلاک» نمایش داده می‌شود</td><td>اعتماد کاربر قبل از پرداخت کم می‌شود</td></tr>
+        <tr><td>صفحهٔ لاگین وسط فلوی بیمه بنر دیجی تین نشان می‌دهد</td><td>حواس کاربر پرت می‌شود</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg><span>قیمت بعد از بررسی مدارک تغییر نمی‌کند، پس غافلگیری قیمت علت ریزش نیست.</span></div>
+  </section>
+
+  <section class="sec" id="bench">
+    <div class="sec-head"><span class="n">۳</span><h2>بنچ‌مارک رقبا</h2></div>
+    <p>دیجی‌پی تنها پلتفرم بررسی‌شده است که بعد از پرداخت از کاربر کار می‌خواهد. رقبای اصلی مدارک و اطلاعات را قبل از پرداخت می‌گیرند و پرداخت پایان کار کاربر است.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>پلتفرم</th><th>نقطهٔ شروع</th><th>ترتیب فلو</th><th>مدارک</th><th>مهلت صدور</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://www.azki.com/blog/online-insurance-purchase-from-azki/" target="_blank" rel="noopener">ازکی</a></td><td>پلاک + کد ملی</td><td>مقایسه ← مدارک ← مشخصات و آدرس ← ارسال ← پرداخت</td><td><span class="pill good">قبل از پرداخت</span></td><td>سفارش تا ۲۱ = صدور همان روز (<a href="https://www.azki.com/car-insurance" target="_blank" rel="noopener">منبع</a>)</td></tr>
+        <tr><td><a href="https://bimebazar.com/third-party-insurance/" target="_blank" rel="noopener">بیمه‌بازار</a></td><td>استعلام قیمت</td><td>استعلام ← تکمیل و بارگذاری ← پرداخت ← صدور</td><td><span class="pill good">قبل از پرداخت</span></td><td>ثبت تا ۱۵ = تحویل همان روز (<a href="https://www.asriran.com/fa/amp/news/572273" target="_blank" rel="noopener">منبع</a>)</td></tr>
+        <tr><td><a href="https://www.zoomit.ir/pr/454805-charisma-insurance/" target="_blank" rel="noopener">کاریزما بیمه</a></td><td>انتخاب شرکت و پوشش</td><td>انتخاب ← پرداخت ← صدور آنی</td><td><span class="pill mid">حداقلی</span></td><td>آنی</td></tr>
+        <tr class="us"><td><b>دیجی‌پی</b></td><td>پلاک + کد ملی</td><td>فرم‌ها ← بیمه‌گر ← پرداخت ← <b class="bad">مدارک ← آدرس</b></td><td><span class="pill bad">بعد از پرداخت</span></td><td>اعلام نشده</td></tr>
+      </tbody>
+    </table></div>
+    <h3>درس‌ها</h3>
+    <ol class="nums">
+      <li><span><b>«مدارک اول، پرداخت آخر» الگوی آشنای بازار است.</b> کاربر ایرانی از قبل با آن آشناست؛ تغییر ترتیب یک آزمایش پرریسک نیست.</span></li>
+      <li><span><b>مهلت صدور همان روز فشار زمانی طبیعی می‌سازد.</b> ازکی و بیمه‌بازار هر دو از آن استفاده می‌کنند؛ ما کش‌بک را به همین مهلت گره می‌زنیم.</span></li>
+      <li><span><b>هرچه کار بعد از پرداخت کمتر، بهتر.</b> کاریزما با صدور آنی بعد از پرداخت، این مسیر را به صفر رسانده است.</span></li>
+    </ol>
+    <p class="muted">فلوی رقبا از راهنماها و صفحه‌های عمومی خودشان استخراج شده، نه خرید واقعی.</p>
+  </section>
+
+  <section class="sec" id="solution">
+    <div class="sec-head"><span class="n">۴</span><h2>راه‌حل</h2></div>
+    <p>مدارک بلافاصله بعد از لاگین گرفته می‌شود، فرم‌ها از همان عکس‌ها پیش‌پر می‌شوند، و پرداخت آخرین کار کاربر است. کش‌بک فعلی هم به مهلت صدور همان روز گره می‌خورد.</p>
+    <div class="flows" role="figure" aria-label="قبل و بعد: جایگاه پرداخت در فلو">
+      <div class="flow-row">
+        <b>فلوی فعلی</b>
+        <div class="steps">
+          <span class="step">لاگین</span><span class="arrow">←</span><span class="step">فرم خودرو</span><span class="arrow">←</span><span class="step">بیمه‌گر</span><span class="arrow">←</span><span class="step">پرداخت</span><span class="arrow">←</span><span class="step after">آپلود مدارک</span><span class="arrow">←</span><span class="step after">آدرس</span>
+        </div>
+        <span class="flow-tag">بعد از پرداخت · ریزش ۶ درصد</span>
+      </div>
+      <div class="flow-row">
+        <b>فلوی پیشنهادی</b>
+        <div class="steps">
+          <span class="step">لاگین</span><span class="arrow">←</span><span class="step">عکس مدارک</span><span class="arrow">←</span><span class="step">تأیید فرم</span><span class="arrow">←</span><span class="step">بیمه‌گر</span><span class="arrow">←</span><span class="step">آدرس</span><span class="arrow">←</span><span class="step pay">پرداخت</span>
+        </div>
+      </div>
+      <p class="muted">فرم از عکس مدارک پیش‌پر می‌شود؛ کش‌بک به ثبت سفارش تا ساعت ۲۱ گره می‌خورد.</p>
+    </div>
+    <div class="comps">
+      <div class="comp"><span class="ix">۰۱</span><b>مدارک اول</b><p>بعد از لاگین، کاربر از کارت خودرو (پشت و رو) و بیمه‌نامهٔ قبلی عکس می‌گیرد؛ چک خوانایی فوری است.</p><span class="fix">کار بعد از پرداخت حذف می‌شود</span></div>
+      <div class="comp"><span class="ix">۰۲</span><b>فرم پیش‌پر</b><p>مشخصات خودرو و بیمه‌نامهٔ قبلی از عکس‌ها استخراج می‌شود و کاربر فقط تأیید یا اصلاح می‌کند.</p><span class="fix">۳ صفحه فرم دستی ← یک صفحهٔ تأیید</span></div>
+      <div class="comp"><span class="ix">۰۳</span><b>نوار پیشرفت صادق</b><p>چهار گام واضح: مدارک و خودرو، پوشش و بیمه‌گر، آدرس، پرداخت.</p><span class="fix">کاربر همیشه می‌داند چقدر مانده</span></div>
+      <div class="comp"><span class="ix">۰۴</span><b>کش‌بک زمان‌دار</b><p>کش‌بک فعلی به شرط ثبت سفارش تا ساعت برش صدور همان روز؛ برای کاربری که مدارک همراهش نیست، سفارش و کش‌بک تا همان ساعت ذخیره می‌ماند.</p><span class="fix">انگیزهٔ واضح، بدون هزینهٔ جدید</span></div>
+      <div class="comp"><span class="ix">۰۵</span><b>صفحهٔ وضعیت</b><p>بعد از پرداخت: بررسی ← صدور ← واریز کش‌بک؛ اگر مدرکی رد شد، فقط همان یکی دوباره آپلود می‌شود.</p><span class="fix">کاربر بعد از پرداخت بلاتکلیف نمی‌ماند</span></div>
+    </div>
+    <div class="callout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H8a2 2 0 1 1 2-3l2 3 2-3a2 2 0 1 1 2 3z"/></svg><span><b>قواعد کش‌بک:</b> شرط قبل از پرداخت شفاف اعلام می‌شود، واریز پس از صدور بیمه‌نامه است، اعتبار غیرقابل برداشت است، و هر خودرو در هر دورهٔ بیمه یک بار.</span></div>
+    <div class="callout warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg><span><b>اصلاحات همراه:</b> رفع نمایش «بدون پلاک» در صفحهٔ مرور، و حذف بنر محصولات دیگر از لاگین وقتی کاربر از فلوی بیمه می‌آید.</span></div>
+  </section>
+
+  <section class="sec" id="flow">
+    <div class="sec-head"><span class="n">۵</span><h2>یوزر فلو</h2></div>
+    <p>کاربر بعد از پرداخت فقط منتظر صدور می‌ماند؛ تنها استثنا مدرک ردشده است که با یک آپلود حل می‌شود.</p>
+    <div class="uflow">
+      <ol class="vline" aria-label="یوزر فلوی راه‌حل">
+        <li><span class="dot">ورود</span><span class="box"><b>ورود پلاک و کد ملی</b></span></li>
+        <li><span class="dot">OTP</span><span class="box"><b>ورود با کد یکبارمصرف</b></span></li>
+        <li class="step-on"><span class="dot">۱</span><span class="box"><b>عکس کارت خودرو و بیمه‌نامهٔ قبلی</b><small>گام ۱ · مدارک و خودرو</small></span></li>
+        <li class="q"><span class="dot">؟</span><span class="box"><b>مدارک همراه است؟</b><small>خیر ← شاخهٔ الف</small></span></li>
+        <li class="step-on"><span class="dot">۱</span><span class="box"><b>تأیید فرم پیش‌پرشده از عکس‌ها</b></span></li>
+        <li class="step-on"><span class="dot">۲</span><span class="box"><b>سقف پوشش، مدت و انتخاب بیمه‌گر</b><small>گام ۲ · پوشش و بیمه‌گر</small></span></li>
+        <li class="step-on"><span class="dot">۳</span><span class="box"><b>آدرس و نحوهٔ ارسال</b><small>گام ۳ · آدرس</small></span></li>
+        <li class="pay"><span class="dot">۴</span><span class="box"><b>پرداخت، آخرین کار کاربر</b><small>گام ۴ · پرداخت</small></span></li>
+        <li><span class="dot">…</span><span class="box"><b>صفحهٔ وضعیت: بررسی مدارک</b></span></li>
+        <li class="q"><span class="dot">؟</span><span class="box"><b>مدارک تأیید شد؟</b><small>خیر ← شاخهٔ ب</small></span></li>
+        <li class="ok"><span class="dot">✓</span><span class="box"><b>صدور بیمه‌نامه و واریز کش‌بک</b></span></li>
+      </ol>
+      <div class="branches">
+        <div class="branch"><small>شاخهٔ الف · مدارک همراه نیست</small><b>سفارش و کش‌بک تا ساعت ۲۱ رزرو می‌شود</b><span>یادآوری پیامکی برای ادامه؛ کاربر بعداً به گام ۱ برمی‌گردد.</span></div>
+        <div class="branch"><small>شاخهٔ ب · مدرک رد شد</small><b>آپلود دوباره، فقط همان مدرک</b><span>کاربر به صفحهٔ وضعیت برمی‌گردد و بقیهٔ سفارش سر جایش است.</span></div>
+      </div>
+    </div>
+    <p>کاربری که مدارک همراهش نیست، قبل از پرداخت خارج می‌شود و پولی بلوکه نمی‌شود؛ سفارش و کش‌بکش تا ساعت برش صدور برایش نگه داشته می‌شود.</p>
+  </section>
+
+  <section class="sec" id="metrics">
+    <div class="sec-head"><span class="n">۶</span><h2>معیار موفقیت و سؤال‌های باز</h2></div>
+    <p>معیار اصلی «بیمه‌نامهٔ صادرشده به ازای هر ورود به فلو» است؛ فقط این عدد نشان می‌دهد فروش واقعی بیشتر شده یا نه. راه‌حل با A/B تست در برابر فلوی فعلی منتشر می‌شود.</p>
+    <div class="tbl"><table style="min-width:420px">
+      <thead><tr><th>معیار</th><th>نقش</th></tr></thead>
+      <tbody>
+        <tr><td><b>صدور به ازای ورود به فلو</b></td><td><span class="pill good">معیار تصمیم</span></td></tr>
+        <tr><td>ریزش بعد از پرداخت (امروز ۶٪)</td><td>هدف مستقیم</td></tr>
+        <tr><td>نرخ پرداخت</td><td>محافظ: نباید افت معنادار کند</td></tr>
+        <tr><td>زمان ورود تا پرداخت</td><td>اثر فرم پیش‌پر</td></tr>
+        <tr><td>تماس با پشتیبانی دربارهٔ برگشت وجه</td><td>هزینهٔ پنهان</td></tr>
+      </tbody>
+    </table></div>
+    <h3>سؤال‌های باز</h3>
+    <ul class="checks">
+      <li>آیا بررسی مدارک در سیستم کارگزار شریک است و تغییر ترتیب به هماهنگی آن‌ها نیاز دارد؟</li>
+      <li>دقت OCR روی کارت خودرو و بیمه‌نامهٔ قبلی چقدر است؟</li>
+      <li>ساعت برش صدور همان روز در دیجی‌پی چند است؟</li>
+      <li>ریزش در مسیر با استعلام سنهاب و بدون آن چقدر است؟</li>
+    </ul>
+    <div class="callout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg><span>هر کاربری که از ریزش به فروش تبدیل شود، تنها حدود ۰٫۵۸٪ از حق بیمه‌اش سود خواب پول از دست می‌رود. اگر حاشیهٔ خالص دیجی‌پی از یک فروش کامل بیشتر از این عدد باشد، کاهش ریزش سودآور است.</span></div>
+  </section>
+
+  <footer><a href="insurance-mvp.html">← نمونهٔ اولیهٔ تعاملی را ببینید</a></footer>
+</main>
+</body>
+</html>
