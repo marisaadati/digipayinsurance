@@ -493,7 +493,7 @@ address:{
 checkout:{
   step:4,
   render(){
-    const ins = curIns(), c = cur();
+    const ins = curIns(), c = cur(), p = price(ins);
     const inst = S.pay === 'inst';
     if(inst) S.method = 'credit'; else if(S.method === 'credit') S.method = 'gateway';
     return `
@@ -504,6 +504,19 @@ checkout:{
       <div class="row"><span class="k">مدارک</span><span class="v" style="color:var(--good)">۳ مدرک دریافت شد</span></div>
       <div class="row"><span class="k">تحویل</span><span class="v">${S.delivery==='digital'?'الکترونیکی':'الکترونیکی و چاپی'}</span></div>
     </div>
+    <h3 style="margin:0;font-size:15px">نوع پرداخت</h3>
+    <div class="opts">
+      <button class="opt ${!inst?'sel':''}" data-pay="cash">
+        <span class="lbl">نقدی <span class="off">${fa(Math.round(ins.disc*100))}٪</span></span>
+        <s class="money">${rial(p.base)} ریال</s><span class="p money">${rial(p.cash)} ریال</span>
+        <span class="cb">کش‌بک ${rial(p.cbCash)} ریال</span>
+      </button>
+      <button class="opt ${inst?'sel':''}" data-pay="inst">
+        <span class="lbl">قسطی ۶ ماهه</span>
+        <span style="font-size:11px;color:var(--muted)">ماهانه ${rial(p.monthly)} ریال</span><span class="p money">${rial(p.inst)} ریال</span>
+        <span class="cb">کش‌بک ${rial(p.cbInst)} ریال</span>
+      </button>
+    </div>
     <h3 style="margin:0;font-size:15px">روش پرداخت</h3>
     ${inst ? choice('credit','اعتبار ۶ قسطهٔ بیمه','بدون کارمزد · بدون چک و سفته', true)
            : choice('gateway','درگاه پرداخت اینترنتی','همهٔ کارت‌های بانکی') + choice('wallet','کیف پول','موجودی: ۰ ریال', false, true)}
@@ -511,6 +524,7 @@ checkout:{
     <div class="after-note">${ICON.check}<span>این آخرین گام است. بعد از پرداخت کاری لازم نیست؛ بیمه‌نامه پس از بررسی مدارک صادر می‌شود.</span></div>`;
   },
   after(){
+    document.querySelectorAll('[data-pay]').forEach(b => b.addEventListener('click', () => { S.pay = b.dataset.pay; render(); }));
     document.querySelectorAll('[data-method]').forEach(b => b.addEventListener('click', () => { if(b.disabled) return; S.method = b.dataset.method; render(); }));
   },
   foot(){
