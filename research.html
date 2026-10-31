@@ -56,6 +56,13 @@ a:hover{text-decoration:underline}
 .hero .eyebrow{font-size:13px;font-weight:600;opacity:.75}
 .hero h1{margin:0;font-size:28px;line-height:1.5;font-weight:800;max-width:24ch}
 .hero p{margin:0;font-size:15px;opacity:.85;max-width:62ch}
+.hero .why{position:relative;z-index:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;max-width:760px}
+.hero .why b{font-size:14.5px}
+.hero .why ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13.5px;line-height:1.8}
+.hero .why li{position:relative;padding-inline-start:18px;opacity:.9}
+.hero .why li::before{content:"";position:absolute;inset-inline-start:2px;top:.7em;width:7px;height:7px;border-radius:50%;background:#5C7DFF}
+.hero a.co{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);text-underline-offset:3px}
+a.co{font-weight:600;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
 .hero .meta{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff}
 @media (max-width:600px){.hero{padding:24px 18px}.hero h1{font-size:22px}}
@@ -174,6 +181,16 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;padding-top:8px}
     <span class="eyebrow">سند تحقیق و راه‌حل · ۸ آبان ۱۴۰۵</span>
     <h1>کاهش ریزش پس از پرداخت در خرید بیمه شخص ثالث دیجی‌پی</h1>
     <p>۶٪ از کاربرانی که بیمهٔ شخص ثالث را پرداخت می‌کنند، خریدشان را نهایی نمی‌کنند، چون فلوی فعلی به آن‌ها القا می‌کند با پرداخت کارشان تمام شده است. راه‌حل این است که مثل رقبای اصلی، مدارک قبل از پرداخت گرفته شود و پرداخت واقعاً آخرین کار کاربر باشد.</p>
+    <div class="why">
+      <b>چرا پرداخت باید آخرین مرحله باشد؟</b>
+      <ul>
+        <li>کاربر پرداخت را پایان خرید می‌داند؛ هر کاری بعد از آن کار اضافه است و ۶٪ آن را انجام نمی‌دهند.</li>
+        <li>مشکل حجم کار نیست، جای آن است: کاربر قبل از پرداخت ۵ صفحه فرم پر می‌کند، اما بعد از آن مدارک را نمی‌فرستد.</li>
+        <li>مدارک اول یعنی فرم پیش‌پر و کار کمتر؛ کاربری که مدارک ندارد قبل از پرداخت می‌رود و پولش بلوکه نمی‌شود.</li>
+        <li>الگوی آشنای بازار است: <a class="co" href="https://www.azki.com/" target="_blank" rel="noopener">ازکی</a> و <a class="co" href="https://bimebazar.com/" target="_blank" rel="noopener">بیمه‌بازار</a> همین ترتیب را دارند و <a class="co" href="https://charisma.ir/" target="_blank" rel="noopener">کاریزما</a> کار بعد از پرداخت را به صفر رسانده.</li>
+        <li>ریسک با A/B تست و معیار «بیمه‌نامهٔ صادرشده به ازای هر ورود به فلو» کنترل می‌شود.</li>
+      </ul>
+    </div>
     <div class="meta"><span class="chip">بیان مسئله</span><span class="chip">بنچ‌مارک رقبا</span><span class="chip">یوزر فلو</span></div>
   </section>
 
@@ -189,7 +206,7 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;padding-top:8px}
     <div class="summary">
       <div class="sum"><small>مسئله</small><span>۶٪ از پرداخت‌کنندگان مدارک را آپلود نمی‌کنند و بیمه‌نامه صادر نمی‌شود</span></div>
       <div class="sum"><small>علت اصلی</small><span>پرداخت وسط فلوست و نوار پیشرفت دو گام بعد از آن را پنهان می‌کند</span></div>
-      <div class="sum"><small>بازار</small><span>ازکی و بیمه‌بازار مدارک را قبل از پرداخت می‌گیرند</span></div>
+      <div class="sum"><small>بازار</small><span><a class="co" href="https://www.azki.com/" target="_blank" rel="noopener">ازکی</a> و <a class="co" href="https://bimebazar.com/" target="_blank" rel="noopener">بیمه‌بازار</a> مدارک را قبل از پرداخت می‌گیرند</span></div>
       <div class="sum"><small>راه‌حل</small><span>مدارک اول با پیش‌پر شدن فرم، پرداخت در انتها، کش‌بک زمان‌دار</span></div>
       <div class="sum"><small>معیار موفقیت</small><span>بیمه‌نامهٔ صادرشده به ازای هر ورود به فلو</span></div>
     </div>
@@ -225,17 +242,17 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;padding-top:8px}
     <div class="tbl"><table>
       <thead><tr><th>پلتفرم</th><th>نقطهٔ شروع</th><th>ترتیب فلو</th><th>مدارک</th><th>مهلت صدور</th></tr></thead>
       <tbody>
-        <tr><td><a href="https://www.azki.com/blog/online-insurance-purchase-from-azki/" target="_blank" rel="noopener">ازکی</a></td><td>پلاک + کد ملی</td><td>مقایسه ← مدارک ← مشخصات و آدرس ← ارسال ← پرداخت</td><td><span class="pill good">قبل از پرداخت</span></td><td>سفارش تا ۲۱ = صدور همان روز (<a href="https://www.azki.com/car-insurance" target="_blank" rel="noopener">منبع</a>)</td></tr>
-        <tr><td><a href="https://bimebazar.com/third-party-insurance/" target="_blank" rel="noopener">بیمه‌بازار</a></td><td>استعلام قیمت</td><td>استعلام ← تکمیل و بارگذاری ← پرداخت ← صدور</td><td><span class="pill good">قبل از پرداخت</span></td><td>ثبت تا ۱۵ = تحویل همان روز (<a href="https://www.asriran.com/fa/amp/news/572273" target="_blank" rel="noopener">منبع</a>)</td></tr>
-        <tr><td><a href="https://www.zoomit.ir/pr/454805-charisma-insurance/" target="_blank" rel="noopener">کاریزما بیمه</a></td><td>انتخاب شرکت و پوشش</td><td>انتخاب ← پرداخت ← صدور آنی</td><td><span class="pill mid">حداقلی</span></td><td>آنی</td></tr>
+        <tr><td><a class="co" href="https://www.azki.com/" target="_blank" rel="noopener">ازکی</a></td><td>پلاک + کد ملی</td><td>مقایسه ← مدارک ← مشخصات و آدرس ← ارسال ← پرداخت (<a href="https://www.azki.com/blog/online-insurance-purchase-from-azki/" target="_blank" rel="noopener">منبع</a>)</td><td><span class="pill good">قبل از پرداخت</span></td><td>سفارش تا ۲۱ = صدور همان روز (<a href="https://www.azki.com/car-insurance" target="_blank" rel="noopener">منبع</a>)</td></tr>
+        <tr><td><a class="co" href="https://bimebazar.com/" target="_blank" rel="noopener">بیمه‌بازار</a></td><td>استعلام قیمت</td><td>استعلام ← تکمیل و بارگذاری ← پرداخت ← صدور (<a href="https://bimebazar.com/third-party-insurance/" target="_blank" rel="noopener">منبع</a>)</td><td><span class="pill good">قبل از پرداخت</span></td><td>ثبت تا ۱۵ = تحویل همان روز (<a href="https://www.asriran.com/fa/amp/news/572273" target="_blank" rel="noopener">منبع</a>)</td></tr>
+        <tr><td><a class="co" href="https://charisma.ir/" target="_blank" rel="noopener">کاریزما بیمه</a></td><td>انتخاب شرکت و پوشش</td><td>انتخاب ← پرداخت ← صدور آنی (<a href="https://www.zoomit.ir/pr/454805-charisma-insurance/" target="_blank" rel="noopener">منبع</a>)</td><td><span class="pill mid">حداقلی</span></td><td>آنی</td></tr>
         <tr class="us"><td><b>دیجی‌پی</b></td><td>پلاک + کد ملی</td><td>فرم‌ها ← بیمه‌گر ← پرداخت ← <b class="bad">مدارک ← آدرس</b></td><td><span class="pill bad">بعد از پرداخت</span></td><td>اعلام نشده</td></tr>
       </tbody>
     </table></div>
     <h3>درس‌ها</h3>
     <ol class="nums">
       <li><span><b>«مدارک اول، پرداخت آخر» الگوی آشنای بازار است.</b> کاربر ایرانی از قبل با آن آشناست؛ تغییر ترتیب یک آزمایش پرریسک نیست.</span></li>
-      <li><span><b>مهلت صدور همان روز فشار زمانی طبیعی می‌سازد.</b> ازکی و بیمه‌بازار هر دو از آن استفاده می‌کنند؛ ما کش‌بک را به همین مهلت گره می‌زنیم.</span></li>
-      <li><span><b>هرچه کار بعد از پرداخت کمتر، بهتر.</b> کاریزما با صدور آنی بعد از پرداخت، این مسیر را به صفر رسانده است.</span></li>
+      <li><span><b>مهلت صدور همان روز فشار زمانی طبیعی می‌سازد.</b> <a class="co" href="https://www.azki.com/" target="_blank" rel="noopener">ازکی</a> و <a class="co" href="https://bimebazar.com/" target="_blank" rel="noopener">بیمه‌بازار</a> هر دو از آن استفاده می‌کنند؛ ما کش‌بک را به همین مهلت گره می‌زنیم.</span></li>
+      <li><span><b>هرچه کار بعد از پرداخت کمتر، بهتر.</b> <a class="co" href="https://charisma.ir/" target="_blank" rel="noopener">کاریزما</a> با صدور آنی بعد از پرداخت، این مسیر را به صفر رسانده است.</span></li>
     </ol>
     <p class="muted">فلوی رقبا از راهنماها و صفحه‌های عمومی خودشان استخراج شده، نه خرید واقعی.</p>
   </section>
