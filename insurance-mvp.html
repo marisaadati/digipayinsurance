@@ -107,10 +107,12 @@ h2.title{font-size:18px;margin:0;font-weight:700}
 .field{display:flex;flex-direction:column;gap:4px;border:1.5px solid var(--line);border-radius:14px;padding:8px 14px;background:var(--surface)}
 .field:focus-within{border-color:var(--blue)}
 .field label{font-size:12px;color:var(--muted)}
-.field input,.field select,.field textarea{border:0;background:transparent;padding:0;font-weight:600;font-size:15px;outline:none}
+.field input,.field select,.field textarea{min-width:0;width:100%;border:0;background:transparent;padding:0;font-weight:600;font-size:15px;outline:none}
 .field textarea{resize:none;min-height:48px}
 .field.prefilled{border-color:transparent;background:var(--surface-2)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.field{min-width:0}
+@media (max-width:340px){.grid2{grid-template-columns:minmax(0,1fr)}}
 
 /* hero (landing) */
 .hero{background:var(--navy);color:#fff;border-radius:22px;padding:20px 18px;display:flex;flex-direction:column;gap:14px}
@@ -156,13 +158,13 @@ h2.title{font-size:18px;margin:0;font-weight:700}
 .ins-logo{width:40px;height:40px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;font-weight:800;color:var(--blue)}
 .ins-head b{font-size:15px}
 .ins-head small{display:block;font-size:12px;color:var(--muted)}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.opt{border:1.5px solid var(--line);border-radius:14px;background:var(--surface-2);padding:10px;text-align:right;display:flex;flex-direction:column;gap:2px}
+.opts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.opt{min-width:0;border:1.5px solid var(--line);border-radius:14px;background:var(--surface-2);padding:10px;text-align:right;display:flex;flex-direction:column;gap:2px}
 .opt.sel{border-color:var(--blue);background:var(--blue-soft)}
 .opt .lbl{font-size:12.5px;font-weight:700;display:flex;justify-content:space-between}
 .opt .off{font-size:11px;background:var(--bad);color:#fff;border-radius:999px;padding:0 6px}
 .opt s{font-size:11px;color:var(--muted)}
-.opt .p{font-weight:800;font-size:14px}
+.opt .p{font-weight:800;font-size:14px;white-space:normal}
 .opt .cb{font-size:11.5px;color:var(--blue);font-weight:600;border-top:1px solid var(--line);padding-top:4px;margin-top:4px}
 .penalty{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
 .penalty b{color:var(--bad)}
